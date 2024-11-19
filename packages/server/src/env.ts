@@ -38,7 +38,7 @@ const defaultEnvValues: EnvVariables = {
 	// check. https://github.com/laurent22/joplin/issues/5738
 
 	MAX_TIME_DRIFT: 2000,
-	NTP_SERVER: 'pool.ntp.org:123',
+	NTP_SERVER: 'ntp.aliyun.com:123',
 
 	DELTA_INCLUDES_ITEMS: true,
 

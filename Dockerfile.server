@@ -2,7 +2,7 @@
 # Build stage
 # =============================================================================
 
-FROM node:18-bullseye AS builder
+FROM node:18-bookworm AS builder
 
 RUN apt-get update \
     && apt-get install -y \
@@ -66,6 +66,7 @@ USER $user
 COPY --chown=$user:$user --from=builder /build/packages /home/$user/packages
 COPY --chown=$user:$user --from=builder /usr/bin/tini /usr/local/bin/tini
 
+ENV TZ Asia/Shanghai
 ENV NODE_ENV=production
 ENV RUNNING_IN_DOCKER=1
 EXPOSE ${APP_PORT}
