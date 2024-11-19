@@ -98,7 +98,7 @@ export class PerformanceTimer {
 		if (!this.enabled) return;
 		const id = this.id_;
 		this.id_++;
-		this.logger_.info(`${this.prefix_}#${id}: Start: ${name}`);
+		this.logger_.debug(`${this.prefix_}#${id}: Start: ${name}`);
 		this.timers_.push({ name, startTime: Date.now(), id });
 	}
 
@@ -106,7 +106,7 @@ export class PerformanceTimer {
 		if (!this.enabled) return;
 		const t = this.timers_.pop();
 		if (!t) throw new Error('Trying to pop a timer but no timer in the list');
-		this.logger_.info(`${this.prefix_}#${t.id}: Done: ${t.name}: ${((Date.now() - t.startTime) / 1000).toFixed(2)}s`);
+		this.logger_.debug(`${this.prefix_}#${t.id}: Done: ${t.name}: ${((Date.now() - t.startTime) / 1000).toFixed(2)}s`);
 	}
 
 }
