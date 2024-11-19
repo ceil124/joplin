@@ -42,10 +42,10 @@ async function main() {
 	}
 	const buildArgs = `--build-arg BUILD_DATE="${buildDate}" --build-arg REVISION="${revision}" --build-arg VERSION="${imageVersion}"`;
 	const dockerTags: string[] = [];
-	const versionPart = imageVersion.split('.');
-	dockerTags.push(isPreRelease ? 'beta' : 'latest');
-	dockerTags.push(versionPart[0] + (isPreRelease ? '-beta' : ''));
-	dockerTags.push(`${versionPart[0]}.${versionPart[1]}${isPreRelease ? '-beta' : ''}`);
+	// const versionPart = imageVersion.split('.');
+	// dockerTags.push(isPreRelease ? 'beta' : 'latest');
+	// dockerTags.push(versionPart[0] + (isPreRelease ? '-beta' : ''));
+	// dockerTags.push(`${versionPart[0]}.${versionPart[1]}${isPreRelease ? '-beta' : ''}`);
 	dockerTags.push(imageVersion);
 
 	process.chdir(rootDir);
