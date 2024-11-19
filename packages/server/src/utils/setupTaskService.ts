@@ -75,14 +75,16 @@ export default async function(env: Env, models: Models, config: Config, services
 			schedule: '* * * * *',
 			run: (_models: Models, services: Services) => services.email.runMaintenance(),
 		},
+	];
 
-		{
+	if (config.HEARTBEAT_MESSAGE_SCHEDULE_ENABLED) {
+		tasks.push({
 			id: TaskId.LogHeartbeatMessage,
 			description: taskIdToLabel(TaskId.LogHeartbeatMessage),
 			schedule: config.HEARTBEAT_MESSAGE_SCHEDULE,
 			run: (_models: Models, _services: Services) => logHeartbeatMessage(),
-		},
-	];
+		});
+	}
 
 	if (config.USER_DATA_AUTO_DELETE_ENABLED) {
 		tasks.push({

@@ -22,7 +22,8 @@ const defaultEnvValues: EnvVariables = {
 	ERROR_STACK_TRACES: false,
 	COOKIES_SECURE: false,
 	RUNNING_IN_DOCKER: false,
-	HEARTBEAT_MESSAGE_SCHEDULE: '0 * * * *',
+	HEARTBEAT_MESSAGE_SCHEDULE_ENABLED: false,
+	HEARTBEAT_MESSAGE_SCHEDULE: '* * * * *',
 
 	// The admin panel is accessible only if this is an admin instance.
 	// Additionally, processing services (those defined in setupTaskService.ts)
@@ -151,6 +152,7 @@ export interface EnvVariables {
 	ERROR_STACK_TRACES: boolean;
 	COOKIES_SECURE: boolean;
 	RUNNING_IN_DOCKER: boolean;
+	HEARTBEAT_MESSAGE_SCHEDULE_ENABLED: boolean;
 	HEARTBEAT_MESSAGE_SCHEDULE: string;
 
 	MAX_TIME_DRIFT: number;
