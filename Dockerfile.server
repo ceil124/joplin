@@ -2,7 +2,7 @@
 # Build stage
 # =============================================================================
 
-FROM node:18-bookworm AS builder
+FROM node:20-bookworm AS builder
 
 RUN apt-get update \
     && apt-get install -y \
@@ -56,7 +56,7 @@ RUN BUILD_SEQUENCIAL=1 yarn install --inline-builds \
 # from a smaller base image.
 # =============================================================================
 
-FROM node:18-bullseye-slim
+FROM node:20-bookworm-slim
 
 ARG user=joplin
 RUN useradd --create-home --shell /bin/bash $user
