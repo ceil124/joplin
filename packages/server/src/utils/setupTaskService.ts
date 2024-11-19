@@ -65,7 +65,7 @@ export default async function(env: Env, models: Models, config: Config, services
 		{
 			id: TaskId.ProcessShares,
 			description: taskIdToLabel(TaskId.ProcessShares),
-			schedule: 'PT10S',
+			schedule: '0 */2 * * *',
 			run: (models: Models) => models.share().updateSharedItems3(),
 		},
 
@@ -76,6 +76,7 @@ export default async function(env: Env, models: Models, config: Config, services
 			run: (_models: Models, services: Services) => services.email.runMaintenance(),
 		},
 	];
+
 
 	if (config.HEARTBEAT_MESSAGE_SCHEDULE_ENABLED) {
 		tasks.push({
