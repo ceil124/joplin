@@ -135,12 +135,12 @@ export default class TaskService extends BaseService {
 
 		await this.models.taskState().start(id);
 
-		// const startTime = Date.now();
+		const startTime = Date.now();
 
 		// await this.models.event().create(EventType.TaskStarted, id.toString());
 
 		try {
-			logger.info(`Running ${displayString} (${runTypeToString(runType)})...`);
+			logger.debug(`Running ${displayString} (${runTypeToString(runType)})...`);
 			await this.tasks_[id].run(this.models, this.services_);
 		} catch (error) {
 			logger.error(`On ${displayString}`, error);
@@ -149,7 +149,7 @@ export default class TaskService extends BaseService {
 		await this.models.taskState().stop(id);
 		// await this.models.event().create(EventType.TaskCompleted, id.toString());
 
-		// logger.info(`Completed ${this.taskDisplayString(id)} in ${Date.now() - startTime}ms`);
+		logger.debug(`Completed ${this.taskDisplayString(id)} in ${Date.now() - startTime}ms`);
 	}
 
 	public async enableTask(taskId: TaskId, enabled = true) {
