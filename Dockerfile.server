@@ -42,7 +42,7 @@ RUN sed --in-place '/onenote-converter/d' ./packages/lib/package.json
 # Note that `yarn install` ignores `NODE_ENV=production` and will install dev
 # dependencies too, but this is fine because we need them to build the app.
 
-RUN BUILD_SEQUENCIAL=1 yarn install --inline-builds || true \
+RUN BUILD_SEQUENCIAL=1 yarn install --inline-builds \
     && yarn cache clean \
     && rm -rf .yarn/berry
 
