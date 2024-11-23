@@ -36,8 +36,8 @@ export const SqliteMaxVariableNum = 999;
 const migrationDir = `${__dirname}/migrations`;
 export const sqliteDefaultDir = pathUtils.dirname(__dirname);
 
-export const defaultAdminEmail = 'admin@localhost';
-export const defaultAdminPassword = 'admin';
+export const defaultAdminEmail = 'zhengyf@localhost';
+export const defaultAdminPassword = 'zhengyf';
 
 export type DbConnection = Knex;
 
