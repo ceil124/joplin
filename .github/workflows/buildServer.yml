@@ -19,14 +19,14 @@ jobs:
         yarn 
         yarn tsc
     - name: Login in to Coding Hub
-      run: echo "${{ secrets.CODING_HUB_PASSWORD }}" | docker login -u "${{ secrets.CODING_HUB_USERNAME }}" --password-stdin fangletianhua-docker.pkg.coding.net
+      run: echo "${{ secrets.CODING_HUB_PASSWORD }}" | docker login -u "${{ secrets.CODING_HUB_USERNAME }}" --password-stdin
     - name: Build and Push Docker image
       uses: docker/build-push-action@v3
       with:
         context: .
         file: ./Dockerfile.ceil124
         push: true
-        tags: fangletianhua-docker.pkg.coding.net/mys/dockerhub/zfw-joplin-server:3.2.0-beta
+        tags: ceil124/zfw-joplin-server:3.2.0-beta
         platforms: linux/amd64
 
 
