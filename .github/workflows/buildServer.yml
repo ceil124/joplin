@@ -19,7 +19,7 @@ jobs:
         yarn 
         yarn tsc
     - name: Login in to Coding Hub
-      run: echo "${{ secrets.CODING_HUB_PASSWORD }}" | docker login -u "${{ secrets.CODING_HUB_USERNAME }}" --password-stdin
+      run: echo "${{ secrets.DOCKER_HUB_PASSWORD }}" | docker login -u "${{ secrets.DOCKER_HUB_USERNAME }}" --password-stdin
     - name: Build and Push Docker image
       uses: docker/build-push-action@v3
       with:
