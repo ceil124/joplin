@@ -14,12 +14,15 @@ jobs:
         cache: 'yarn'
     - name: build project
       run: |
-        rm -rf packages/app-desktop packages/app-mobile packages/default-plugins
-        yarn -v
+        rm -rf packages/app-desktop packages/app-mobile packages/editor packages/default-plugins
         yarn 
         yarn tsc
-    - name: Login in to Coding Hub
-      run: echo "${{ secrets.DOCKER_HUB_PASSWORD }}" | docker login -u "${{ secrets.DOCKER_HUB_USERNAME }}" --password-stdin
+        yarn build
+    - name: Log in to Docker Hub
+      uses: docker/login-action@v2
+      with:
+        username: ${{ secrets.DOCKER_HUB_USERNAME }}
+        password: ${{ secrets.DOCKER_HUB_PASSWORD }}
     - name: Build and Push Docker image
       uses: docker/build-push-action@v3
       with:
