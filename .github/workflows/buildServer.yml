@@ -14,6 +14,7 @@ jobs:
         cache: 'yarn'
     - name: build project
       run: |
+        rm -rf  packages/app-desktop packages/app-mobile
         yarn -v
         yarn 
         yarn tsc
