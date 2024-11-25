@@ -17,7 +17,6 @@ jobs:
         rm -rf packages/app-desktop packages/app-mobile packages/editor packages/default-plugins
         yarn 
         yarn tsc
-        yarn build
     - name: Log in to Docker Hub
       uses: docker/login-action@v2
       with:
