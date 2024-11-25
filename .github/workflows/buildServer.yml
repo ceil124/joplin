@@ -16,5 +16,18 @@ jobs:
       run: |
         yarn -v
         yarn 
-    
+        yarn tsc
+    - name: Build and Push Docker image
+      uses: docker/build-push-action@v3
+      with:
+        context: .
+        file: ./Dockerfile.ceil124
+        push: true
+        tags: |
+          fangletianhua-docker.pkg.coding.net/mys/dockerhub/zfw-joplin-server:3.2.0-beta
+        platforms: linux/amd64
+        username: ${{ secrets.CODING_HUB_USERNAME }}
+        password: ${{ secrets.CODING_HUB_PASSWORD }}
+
+
 
