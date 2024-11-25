@@ -57,7 +57,7 @@ async function main() {
 	console.info('isPreRelease:', isPreRelease);
 	console.info('Docker tags:', dockerTags.join(', '));
 
-	const dockerCommand = `docker build --no-cache --progress=plain -t "${repository}:${imageVersion}" ${buildArgs} -f Dockerfile.server .`;
+	const dockerCommand = `docker build --no-cache --progress=plain -t "${repository}:${imageVersion}" ${buildArgs} -f Dockerfile.ceil124 .`;
 	if (dryRun) {
 		console.info(dockerCommand);
 		return;
