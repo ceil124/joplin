@@ -2,7 +2,12 @@
 # Build stage
 # =============================================================================
 
-FROM node:20-bullseye AS builder
+FROM node:18-bullseye AS builder
+
+RUN apt-get update \
+    && apt-get install -y \
+    python tini \
+    && rm -rf /var/lib/apt/lists/*
 
 # Enables Yarn
 RUN corepack enable
@@ -51,19 +56,25 @@ RUN BUILD_SEQUENCIAL=1 yarn install --inline-builds \
 # from a smaller base image.
 # =============================================================================
 
-FROM node:20-bullseye-slim
+FROM node:18-bullseye-slim
 
-USER root
+ARG user=joplin
+RUN useradd --create-home --shell /bin/bash $user
 
-COPY --from=builder /build/packages /root/packages
+USER $user
 
-ENV TZ Asia/Shanghai
+COPY --chown=$user:$user --from=builder /build/packages /home/$user/packages
+COPY --chown=$user:$user --from=builder /usr/bin/tini /usr/local/bin/tini
+
 ENV NODE_ENV=production
 ENV RUNNING_IN_DOCKER=1
 EXPOSE ${APP_PORT}
 
-WORKDIR /root/packages/server
-CMD ["yarn", "start"]
+# Use Tini to start Joplin Server:
+# https://github.com/nodejs/docker-node/blob/main/docs/BestPractices.md#handling-kernel-signals
+WORKDIR /home/$user/packages/server
+ENTRYPOINT ["tini", "--"]
+CMD ["yarn", "start-prod"]
 
 # Build-time metadata
 # https://github.com/opencontainers/image-spec/blob/master/annotations.md
