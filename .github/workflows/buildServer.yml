@@ -1,0 +1,25 @@
+name: build server
+
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+
+jobs:
+  build:
+    runs-on: ubuntu-20.04
+
+    steps:
+    - uses: actions/checkout@v4
+    - name: Use Node.js ${{ matrix.node-version }}
+      uses: actions/setup-node@v4
+      with:
+        node-version: 20.18.0
+        cache: 'yarn'
+    - name: build project
+      run: |
+        yarn -v
+        yarn 
+    
+
