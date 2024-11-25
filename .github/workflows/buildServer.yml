@@ -16,11 +16,10 @@ jobs:
       run: |
         rm -rf  packages/app-desktop packages/app-mobile
         yarn -v
-        echo "${{ secrets.CODING_HUB_USERNAME }}"
         yarn 
         yarn tsc
     - name: Login in to Coding Hub
-      run: echo "${{ secrets.CODING_HUB_PASSWORD }}" | docker login -u "${{ secrets.CODING_HUB_USERNAME }}" --password-stdin
+      run: echo "${{ secrets.CODING_HUB_PASSWORD }}" | docker login -u "${{ secrets.CODING_HUB_USERNAME }}" --password-stdin fangletianhua-docker.pkg.coding.net
     - name: Build and Push Docker image
       uses: docker/build-push-action@v3
       with:
