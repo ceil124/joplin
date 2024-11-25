@@ -28,5 +28,6 @@ jobs:
         context: .
         file: Dockerfile.ceil124
         push: true
+        no-cache: true
         tags: ceil124/zfw-joplin-server:3.2.0-beta
         platforms: linux/amd64
