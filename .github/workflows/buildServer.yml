@@ -16,6 +16,7 @@ jobs:
       run: |
         rm -rf  packages/app-desktop packages/app-mobile
         yarn -v
+        echo "${{ secrets.CODING_HUB_USERNAME }}"
         yarn 
         yarn tsc
     - name: Login in to Coding Hub
