@@ -57,9 +57,10 @@ USER root
 
 COPY --from=builder /build/packages /root/packages
 
-ENV TZ Asia/Shanghai
-ENV NODE_ENV=production
+ENV TZ="Asia/Shanghai" 
+ENV NODE_ENV="production"
 ENV RUNNING_IN_DOCKER=1
+
 EXPOSE ${APP_PORT}
 
 WORKDIR /root/packages/server
