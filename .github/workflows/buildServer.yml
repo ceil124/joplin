@@ -17,11 +17,12 @@ jobs:
         rm -rf packages/app-desktop packages/app-mobile packages/editor packages/default-plugins
         yarn 
         yarn tsc
-    - name: Log in to Docker Hub
+    - name: Log in to tencent Docker Hub
       uses: docker/login-action@v2
       with:
-        username: ${{ secrets.DOCKER_HUB_USERNAME }}
-        password: ${{ secrets.DOCKER_HUB_PASSWORD }}
+        registry: ccr.ccs.tencentyun.com
+        username: ${{ secrets.TC_DOCKER_HUB_USERNAME }}
+        password: ${{ secrets.TC_DOCKER_HUB_PASSWORD }}
     - name: Build and Push Docker image
       uses: docker/build-push-action@v3
       with:
@@ -29,5 +30,6 @@ jobs:
         file: Dockerfile.ceil124
         push: true
         no-cache: true
-        tags: ceil124/zfw-joplin-server:3.2.0-beta
+        tags: |
+          ccr.ccs.tencentyun.com/zhengyf/zfw-joplin-server:3.2.0-beta
         platforms: linux/amd64
