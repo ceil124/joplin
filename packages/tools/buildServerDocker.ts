@@ -42,10 +42,10 @@ async function main() {
 	}
 	const buildArgs = `--build-arg BUILD_DATE="${buildDate}" --build-arg REVISION="${revision}" --build-arg VERSION="${imageVersion}"`;
 	const dockerTags: string[] = [];
-	// const versionPart = imageVersion.split('.');
-	// dockerTags.push(isPreRelease ? 'beta' : 'latest');
-	// dockerTags.push(versionPart[0] + (isPreRelease ? '-beta' : ''));
-	// dockerTags.push(`${versionPart[0]}.${versionPart[1]}${isPreRelease ? '-beta' : ''}`);
+	const versionPart = imageVersion.split('.');
+	dockerTags.push(isPreRelease ? 'beta' : 'latest');
+	dockerTags.push(versionPart[0] + (isPreRelease ? '-beta' : ''));
+	dockerTags.push(`${versionPart[0]}.${versionPart[1]}${isPreRelease ? '-beta' : ''}`);
 	dockerTags.push(imageVersion);
 
 	process.chdir(rootDir);
@@ -57,7 +57,7 @@ async function main() {
 	console.info('isPreRelease:', isPreRelease);
 	console.info('Docker tags:', dockerTags.join(', '));
 
-	const dockerCommand = `docker build --no-cache --progress=plain -t "${repository}:${imageVersion}" ${buildArgs} -f Dockerfile.ceil124 .`;
+	const dockerCommand = `docker build --progress=plain -t "${repository}:${imageVersion}" ${buildArgs} -f Dockerfile.server .`;
 	if (dryRun) {
 		console.info(dockerCommand);
 		return;
