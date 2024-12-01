@@ -17,11 +17,6 @@ jobs:
         rm -rf packages/app-desktop packages/app-mobile packages/editor packages/default-plugins
         yarn 
         yarn tsc
-    - name: Log in to Docker Hub
-      uses: docker/login-action@v2
-      with:
-        username: ${{ secrets.DOCKER_HUB_USERNAME }}
-        password: ${{ secrets.DOCKER_HUB_PASSWORD }}
     - name: Log in to tencent Docker Hub
       uses: docker/login-action@v2
       with:
@@ -36,6 +31,5 @@ jobs:
         push: true
         no-cache: true
         tags: |
-          ceil124/zfw-joplin-server:3.2.0-beta
           ccr.ccs.tencentyun.com/zhengyf/zfw-joplin-server:3.2.0-beta
         platforms: linux/amd64
