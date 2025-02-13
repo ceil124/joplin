@@ -358,6 +358,7 @@ const CodeMirror = (props: NoteBodyEditorProps, ref: ForwardedRef<NoteBodyEditor
 		return {
 			language: isHTMLNote ? EditorLanguageType.Html : EditorLanguageType.Markdown,
 			readOnly: props.disabled,
+			markdownMarkEnabled: Setting.value('markdown.plugin.mark'),
 			katexEnabled: Setting.value('markdown.plugin.katex'),
 			themeData: {
 				...styles.globalTheme,
@@ -372,10 +373,12 @@ const CodeMirror = (props: NoteBodyEditorProps, ref: ForwardedRef<NoteBodyEditor
 			spellcheckEnabled: Setting.value('editor.spellcheckBeta'),
 			keymap: keyboardMode,
 			indentWithTabs: true,
+			tabMovesFocus: props.tabMovesFocus,
 			editorLabel: _('Markdown editor'),
 		};
 	}, [
 		props.contentMarkupLanguage, props.disabled, props.keyboardMode, styles.globalTheme,
+		props.tabMovesFocus,
 	]);
 
 	// Update the editor's value
